@@ -1,0 +1,18 @@
+[PrefixDeclaration]
+obda:		https://w3id.org/obda/vocabulary#
+xsd:		http://www.w3.org/2001/XMLSchema#
+owl:		http://www.w3.org/2002/07/owl#
+rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
+rdfs:		http://www.w3.org/2000/01/rdf-schema#
+
+[MappingDeclaration] @collection [[
+mappingId	MAPPING-USERS
+target		<https://db.nprod.net/accounts_user/id={id}> a <https://db.nprod.net/accounts_user> ;
+source		SELECT * FROM "public"."accounts_user"
+
+
+mappingId	MAPPING-PROJECTS
+target		<https://db.nprod.net/project_manager_project/id={id}> a <https://db.nprod.net/project_manager_project> ; <https://db.nprod.net/project_manager_project#has-owner> <https://db.nprod.net/accounts_user/id={id}> ; <https://db.nprod.net/project_manager_project#has-parent> <https://db.nprod.net/project_manager_project/id={parent_id}> .
+source		SELECT * FROM "public"."project_manager_project"
+
+]]

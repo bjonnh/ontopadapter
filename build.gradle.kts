@@ -8,26 +8,15 @@ plugins {
     kotlin("jvm") version "1.3.10"
 }
 
-buildscript {
-
-}
-
-
-//apply(plugin = "com.github.johnrengelman.shadow")
-
-
 application {
     mainClassName = "net.nprod.db.ontopadapter.MainKt"
 }
 
-group = "net.nprod.db"
-version = "0.1-SNAPSHOT"
-
 var ktor_version = "1.0.1"
 var ontop_version = "3.0.0-beta-2"
+var version = "0.1-SNAPSHOT"
 
 repositories {
-
     mavenCentral()
     jcenter()
 }
@@ -42,8 +31,9 @@ dependencies {
     compile(group = "it.unibz.inf.ontop", name = "ontop-rdf4j", version = ontop_version)
     compile(group = "it.unibz.inf.ontop", name = "ontop-owlapi", version = ontop_version)
     runtime(group = "net.sourceforge.owlapi", name = "owlapi-distribution", version = "5.1.8")
+    // You may want to use another JDBC provider or none at all and give them in the java command line
     runtime("org.postgresql:postgresql:42.2.5")
-    testCompile("junit", "junit", "4.12")
+    //testCompile("junit", "junit", "4.12")
 }
 
 configure<JavaPluginConvention> {
@@ -63,16 +53,13 @@ compileTestKotlin.kotlinOptions {
 }
 
 tasks.withType<ShadowJar> {
-
     baseName = "ontopadapter"
     manifest {
-
         attributes["Main-Class"] = "net.nprod.db.ontopadapter.MainKt"
-
     }
 
     classifier = ""
-    version = "0.0.1-SNAPSHOT"
+    version = version
 
     mergeServiceFiles()
 }
