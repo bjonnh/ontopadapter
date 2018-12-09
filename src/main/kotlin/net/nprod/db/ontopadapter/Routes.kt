@@ -17,7 +17,6 @@ fun Application.mainModule() {
         post("/sparql") {
             val sparqlQuery = call.receiveText()
 
-
             try {
                 val out = queryOntop(repo, sparqlQuery)
                 call.response.header("Access-Control-Allow-Origin", "*")
