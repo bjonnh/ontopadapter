@@ -7,12 +7,12 @@ rdfs:		http://www.w3.org/2000/01/rdf-schema#
 
 [MappingDeclaration] @collection [[
 mappingId	MAPPING-USERS
-target		<https://db.nprod.net/accounts_user/id={id}> a <https://db.nprod.net/accounts_user> ;
-source		SELECT * FROM "public"."accounts_user"
+target		<https://db.nprod.net/user/{id}> a <https://db.nprod.net/user> .
+source		SELECT * FROM "public"."project_user"
 
 
 mappingId	MAPPING-PROJECTS
-target		<https://db.nprod.net/project_manager_project/id={id}> a <https://db.nprod.net/project_manager_project> ; <https://db.nprod.net/project_manager_project#has-owner> <https://db.nprod.net/accounts_user/id={id}> ; <https://db.nprod.net/project_manager_project#has-parent> <https://db.nprod.net/project_manager_project/id={parent_id}> .
-source		SELECT * FROM "public"."project_manager_project"
+target		<https://db.nprod.net/project/{id}> a <https://db.nprod.net/project> ; <https://db.nprod.net/project#has-owner> <https://db.nprod.net/user/{id}> ; <https://db.nprod.net/projectt#has-parent> <https://db.nprod.net/project/{parent_id}> .
+source		SELECT * FROM "public"."project"
 
 ]]

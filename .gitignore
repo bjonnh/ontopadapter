@@ -4,3 +4,4 @@ build
 *.class
 *.log
 hs_err_pid*
+docker/ontopadapter.jar

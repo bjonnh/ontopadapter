@@ -1,5 +1,5 @@
 FROM openjdk:11-jre
-COPY ../build/lib/ontopadapter-0.1-SNAPSHOT.jar /ontopadapter.jar
+COPY ontopadapter.jar /ontopadapter.jar
 RUN mkdir /config
 COPY ktor.config /config/ktor.config
 COPY db.obda /config/db.obda

@@ -8,9 +8,9 @@
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="https://db.nprod.net"/>
 
-    <owl:ObjectProperty rdf:about="https://db.nprod.net/project_manager_project#has-owner"/>
-    <owl:ObjectProperty rdf:about="https://db.nprod.net/project_manager_project#has-parent"/>
+    <owl:ObjectProperty rdf:about="https://db.nprod.net/project#has-owner"/>
+    <owl:ObjectProperty rdf:about="https://db.nprod.net/project#has-parent"/>
 
-    <owl:Class rdf:about="https://db.nprod.net/project_manager_project"/>
-    <owl:Class rdf:about="https://db.nprod.net/accounts_user"/>
+    <owl:Class rdf:about="https://db.nprod.net/project"/>
+    <owl:Class rdf:about="https://db.nprod.net/user"/>
 </rdf:RDF>

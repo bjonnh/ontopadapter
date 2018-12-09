@@ -9,7 +9,7 @@ Using [Ontop](http://ontop.inf.unibz.it/), [Kotlin](https://www.kotlinlang.org) 
 # Usage
 
 There is an example of usage in the docker directory. The example
-would connect to a postgresql database with two tables: *project_manager_project* and *accounts_user*.
+would connect to a postgresql database with two tables: *project* and *user*.
 
 Each project can have another project has its parent and a user as its owner
 
@@ -22,9 +22,24 @@ The files:
 - db.properties: The database parameters (type of DB, )
 - ktor.config: The webserver configuration (port is the main thing you may want to change here)
 
-The Dockerfile will use a build in build/libs/ontopadapter-VERSION.jar by default.
+The Dockerfile will use a build in build/libs/ontopadapter.jar by default.
 
 I will try to keep things up to date, but you way have to check the version in *build.gradle.kts*.
+
+You can use:
+```shell
+cd docker
+cp ../build/lib/ontopadapter.jar .
+docker-compose up --build
+```
+
+That will build a full testing environment and connect to it using:
+
+```shell
+curl -XPOST --data 'select * { ?s ?p ?o.}' http://127.0.0.1:8080
+```
+
+And you will get the SPARQL json output for that example query.
 
 # What is left to do
 
@@ -32,4 +47,4 @@ I will try to keep things up to date, but you way have to check the version in *
 - [ ] Handle errors better
 - [ ] Handle the update of parameters
 - [ ] Add metrics
-
+- [ ] Find a way to automate tests and CI
