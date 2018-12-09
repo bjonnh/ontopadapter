@@ -1,6 +1,5 @@
 package net.nprod.db.ontopadapter
 
-import io.ktor.application.Application
 import it.unibz.inf.ontop.injection.OntopSQLOWLAPIConfiguration
 import it.unibz.inf.ontop.rdf4j.repository.OntopRepository
 
@@ -10,16 +9,7 @@ import org.eclipse.rdf4j.query.QueryLanguage
 import org.eclipse.rdf4j.query.resultio.sparqljson.SPARQLResultsJSONWriter
 
 import io.ktor.server.engine.embeddedServer
-import io.ktor.http.ContentType
 import io.ktor.server.netty.Netty
-import io.ktor.response.header
-import io.ktor.response.respondText
-import io.ktor.routing.routing
-import io.ktor.application.call
-import io.ktor.http.HttpStatusCode
-import io.ktor.request.receiveText
-import io.ktor.response.respond
-import io.ktor.routing.post
 import io.ktor.server.engine.commandLineEnvironment
 import java.io.ByteArrayOutputStream
 
@@ -53,28 +43,11 @@ fun queryOntop(repo: OntopRepository, sparqlQuery: String): String {
     return sb.toString()
 }
 
-
-fun Application.mainModule() {
-    routing {
-        post("/sparql") {
-            val sparqlQuery = call.receiveText()
-
-
-            try {
-                var out = queryOntop(repo, sparqlQuery)
-                call.response.header("Access-Control-Allow-Origin", "*")
-                call.respondText(out, ContentType.Text.Plain)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                call.respond(HttpStatusCode.UnprocessableEntity, "Impossible to process that query.")
-            }
-        }
-    }
-}
-
 fun main(args: Array<String>) {
+    // The ontop repository is initialized at this stage
+    // We need to find a way to get that to restart in case of issues
     repo.initialize()
-
+    // The command line arguments are given to netty (allows for the mandatory custom configuration)
     embeddedServer(Netty, commandLineEnvironment(args)).start(wait = true)
     repo.shutDown()
 }
